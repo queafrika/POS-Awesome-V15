@@ -262,6 +262,19 @@
 										></v-select>
 									</div>
 								</div>
+								<div class="form-row">
+									<div class="form-field">
+										<v-select
+											density="compact"
+											class="pos-themed-input"
+											:label="frappe._('Features')"
+											v-model="item.features"
+											:items="features"
+											multiple
+											variant="outlined"
+										></v-select>
+									</div>
+								</div>
 							</div>
 
 							<!-- Pricing Section -->
@@ -709,6 +722,7 @@ export default {
 			containerWidth: 0,
 			containerHeight: 0,
 			resizeObserver: null,
+			features: [],
 			breakpoint: "xl",
 			columnVisibility: new Map(),
 			// Performance optimization caches
@@ -972,6 +986,25 @@ export default {
 			}
 		},
 
+		getFeatures() {
+			if (this.features.length > 0) return;
+			const vm = this;
+			frappe.db
+			.get_list("Item Feature", {
+				fields: ["name"],
+				filters: { "type": ["!=", "Composite"] }, // filter where type is not "Composite"
+				limit: 1000,
+				order_by: "name",
+			})
+			.then((data) => {
+				if (data.length > 0) {
+					data.forEach((el) => {
+						vm.features.push(el.name);
+					});
+				}
+			});
+		},
+
 		updateBreakpoint() {
 			if (this.containerWidth < 500) {
 				this.breakpoint = "xs";
@@ -1184,6 +1217,13 @@ export default {
 		},
 	},
 
+	created() {
+		logComponentRender(this, "ItemsTable", "created", {
+			rows: this.items?.length || 0,
+		});
+		this.getFeatures();
+	},
+
 	mounted() {
 		logComponentRender(this, "ItemsTable", "mounted", {
 			rows: this.items?.length || 0,
@@ -1377,7 +1417,7 @@ export default {
 /* Ensure all cell contents fill the cell */
 .pos-table :deep(td) > div {
 	width: 100%;
-	height: 100%;
+	height: auto;
 	display: flex;
 	align-items: center;
 	justify-content: center;

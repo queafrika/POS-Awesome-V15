@@ -808,6 +808,7 @@ export default {
 				item.posa_is_offer = updatedData.posa_is_offer;
 				item.posa_is_replace = updatedData.posa_is_replace;
 				item.is_free_item = updatedData.is_free_item;
+				item.features = 
 				item.qty = flt(updatedData.qty);
 				item.rate = flt(updatedData.rate);
 				item.uom = updatedData.uom;
@@ -860,6 +861,7 @@ export default {
 				is_free_item: item.is_free_item,
 				qty: flt(item.qty),
 				uom: item.uom,
+				features: item.features,
 				conversion_factor: item.conversion_factor,
 				serial_no: item.serial_no,
 				// Link to original invoice item when doing returns

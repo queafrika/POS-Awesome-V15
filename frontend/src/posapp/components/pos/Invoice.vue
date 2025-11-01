@@ -502,8 +502,6 @@ export default {
 					required: false,
 					width: "120px",
 				},
-				{ title: __("Discount %"), key: "discount_value", align: "end", required: false },
-				{ title: __("Discount Amount"), key: "discount_amount", align: "end", required: false },
 				{ title: __("Rate"), key: "rate", align: "center", required: true },
 				{ title: __("Amount"), key: "amount", align: "center", required: true },
 				{ title: __("Offer?"), key: "posa_is_offer", align: "center", required: false },

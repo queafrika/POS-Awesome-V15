@@ -7,6 +7,7 @@ import frappe
 from erpnext.accounts.party import get_party_account
 from erpnext.selling.doctype.sales_order.sales_order import make_sales_invoice
 from frappe.utils import getdate, nowdate
+from itemfeatures.itemfeatures.utils import get_composite_feature
 
 from posawesome.posawesome.api.payment_entry import create_payment_entry
 
@@ -124,6 +125,7 @@ def submit_sales_order(order):
     """Submit sales order and create payment entries."""
     order = json.loads(order)
     _map_delivery_dates(order)
+    _map_item_features(order)
     if order.get("name") and frappe.db.exists("Sales Order", order.get("name")):
         so_doc = frappe.get_doc("Sales Order", order.get("name"))
         so_doc.update(order)
@@ -148,3 +150,8 @@ def submit_sales_order(order):
     # Payment entries run in the background to speed up checkout
 
     return {"name": so_doc.name, "status": so_doc.docstatus}
+
+def _map_item_features(data):
+    for item in data.get("items", []):
+        if item.get("features", []):
+            item["custom_feature"] = get_composite_feature(item.get("features", []))

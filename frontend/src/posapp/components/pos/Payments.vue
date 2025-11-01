@@ -329,6 +329,7 @@
 
 					<!-- Delivery Date and Address (if applicable) -->
 					<v-col cols="6" v-if="pos_profile.posa_allow_sales_order && invoiceType === 'Order'">
+						<span class="text-caption text-grey">Delivery Date</span>
 						<VueDatePicker
 							v-model="new_delivery_date"
 							model-type="format"
