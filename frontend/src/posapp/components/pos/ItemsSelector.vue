@@ -3383,7 +3383,7 @@ export default {
 			}
 		},
 		isNegativeStockEnabled() {
-			return parseBooleanSetting(this.stock_settings?.allow_negative_stock);
+			return 1
 		},
 		showMultipleItemsDialog(items, scannedCode) {
 			// Create a dialog to let user choose from multiple matches
