@@ -64,7 +64,7 @@ export function useCartValidation() {
 				return false;
 			}
 
-                        const isStockItem = parseBooleanSetting(item?.is_stock_item);
+                        const isStockItem = 0;
 
                         if (isStockItem) {
                                 // Step 4: Client-side quantity validation (before server call)
@@ -196,7 +196,7 @@ export function useCartValidation() {
 	) {
 		console.warn("Using fallback validation due to server validation failure");
 
-                const isStockItem = parseBooleanSetting(item?.is_stock_item);
+                const isStockItem = 0;
 
                 if (isStockItem) {
                         // Allow negative stock items when Allow Negative Stock is enabled
