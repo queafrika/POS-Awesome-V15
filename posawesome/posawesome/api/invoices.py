@@ -132,7 +132,7 @@ def _should_block(pos_profile):
     if allow_negative:
         return False
 
-    block_sale = 1
+    block_sale = 0
     if pos_profile:
         block_sale = cint(
             frappe.db.get_value("POS Profile", pos_profile, "posa_block_sale_beyond_available_qty") or 1
