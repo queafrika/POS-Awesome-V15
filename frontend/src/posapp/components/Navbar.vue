@@ -34,14 +34,14 @@
 			</template>
 
 			<!-- Slot for CPU gadget -->
-			<template #cpu-gadget>
+			<!-- <template #cpu-gadget>
 				<ServerUsageGadget />
-			</template>
+			</template> -->
 
 			<!-- Slot for Database Usage Gadget -->
-			<template #db-usage-gadget>
+			<!-- <template #db-usage-gadget>
 				<DatabaseUsageGadget />
-			</template>
+			</template> -->
 
 			<!-- Slot for menu -->
 			<template #menu>
@@ -124,8 +124,8 @@ import { clearAllCaches } from "../../utils/clearAllCaches.js";
 import { isOffline } from "../../offline/index.js";
 import { useRtl } from "../composables/useRtl.js";
 
-const ServerUsageGadget = defineAsyncComponent(() => import("./navbar/ServerUsageGadget.vue"));
-const DatabaseUsageGadget = defineAsyncComponent(() => import("./navbar/DatabaseUsageGadget.vue"));
+// const ServerUsageGadget = defineAsyncComponent(() => import("./navbar/ServerUsageGadget.vue"));
+// const DatabaseUsageGadget = defineAsyncComponent(() => import("./navbar/DatabaseUsageGadget.vue"));
 const DEFAULT_SNACK_TIMEOUT = 3000;
 
 export default {
@@ -146,8 +146,8 @@ export default {
 		CacheUsageMeter,
 		AboutDialog,
 		OfflineInvoicesDialog: OfflineInvoices,
-		ServerUsageGadget,
-		DatabaseUsageGadget,
+		// ServerUsageGadget,
+		// DatabaseUsageGadget,
 	},
 	props: {
 		posProfile: {

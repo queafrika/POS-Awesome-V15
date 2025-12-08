@@ -126,6 +126,7 @@ def submit_sales_order(order):
     order = json.loads(order)
     _map_delivery_dates(order)
     _map_item_features(order)
+    _map_accounting_dimensions(order)
     if order.get("name") and frappe.db.exists("Sales Order", order.get("name")):
         so_doc = frappe.get_doc("Sales Order", order.get("name"))
         so_doc.update(order)
@@ -155,3 +156,8 @@ def _map_item_features(data):
     for item in data.get("items", []):
         if item.get("features", []):
             item["custom_feature"] = get_composite_feature(item.get("features", []))
+
+def _map_accounting_dimensions(data):
+    pos_profile = frappe.get_doc("POS Profile", data.get("pos_profile"))
+    data["cost_center"] = data.get("cost_center") or pos_profile.get("cost_center")
+    data["branch"] = data.get("branch") or pos_profile.get("branch")
